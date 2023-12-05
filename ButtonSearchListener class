@@ -1,0 +1,53 @@
+ public class ButtonSearchListener implements ActionListener { 
+
+    public void actionPerformed(ActionEvent a) { 
+
+        String fileName = t1.getText() + ".txt"; 
+
+        String keyword = t2.getText(); 
+
+        FileInputStream file; 
+
+            ObjectInputStream obj; 
+
+            BufferedReader br; 
+
+            String lin = null; 
+
+            try { 
+
+                br = new BufferedReader(new FileReader(fileName)); 
+
+                int i = 0; 
+
+                while ((lin = br.readLine()) != null)  
+
+                { 
+
+                    if(lin.contains(keyword)) 
+
+                    { 
+
+                        ta.append(lin + "\n"); 
+
+                    }                 
+
+                    i++; 
+
+                } 
+
+            } 
+
+        catch (FileNotFoundException e) { 
+
+            System.out.println("The file Accepted.txt is not found"); 
+
+        } catch (IOException e) { 
+
+            System.out.println("Exception of I/O: " + e.getMessage()); 
+
+        } 
+
+    } 
+
+    } 
