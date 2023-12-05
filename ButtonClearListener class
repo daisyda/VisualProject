@@ -1,0 +1,17 @@
+    public class ButtonClearListener implements ActionListener { 
+
+    public void actionPerformed(ActionEvent a)  
+
+    { 
+
+        t1.setText(""); 
+
+        t2.setText(""); 
+
+        ta.setText(""); 
+
+    } 
+
+    } 
+
+     
