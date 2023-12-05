@@ -1,0 +1,109 @@
+public class SearchPage extends JFrame{ 
+
+     
+
+    private JLabel l1, l2, l3; 
+
+    private JButton b1, b2, b3; 
+
+    private JTextField t1, t2; 
+
+    private JTextArea ta; 
+
+    private JPanel p1, p2, pC, pG; 
+
+     
+
+    public SearchPage() 
+
+    { 
+
+        super("Saecrh"); 
+
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); 
+
+        setLocation(600, 300); 
+
+         
+
+        p1 = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
+
+        l1 = new JLabel("File to search:"); 
+
+        t1 = new JTextField(20); 
+
+        p1.add(l1); 
+
+        p1.add(t1); 
+
+         
+
+        p2 = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+
+        l2 = new JLabel("Keywords"); 
+
+        t2 = new JTextField(20); 
+
+        b1 = new JButton("Search"); 
+
+        b2 = new JButton("Clear"); 
+
+        b3 = new JButton("Cancel"); 
+
+        p2.add(l2); 
+
+        p2.add(t2); 
+
+        p2.add(b1); 
+
+        p2.add(b2); 
+
+        p2.add(b3); 
+
+         
+
+        ta = new JTextArea(); 
+
+        ta.setRows(20); 
+
+        JScrollPane scrollPane = new JScrollPane(ta); // Enclose the text area within a scroll pane         
+
+        pC = new JPanel(); 
+
+        pC.setLayout(new GridLayout(2, 1)); 
+
+         
+
+        pC.add(p1); 
+
+        pC.add(p2); 
+
+         
+
+        pG = (JPanel)getContentPane(); 
+
+        pG.setLayout(new BorderLayout()); 
+
+         
+
+        pG.add(pC,BorderLayout.NORTH); 
+
+        pG.add(ta, BorderLayout.SOUTH); 
+
+         
+
+        b1.addActionListener(new ButtonSearchListener()); 
+
+        b2.addActionListener(new ButtonClearListener()); 
+
+        b3.addActionListener(new ButtonCancelListener());         
+
+  
+
+        setVisible(true); 
+
+        pack(); 
+
+    } 
+
+     
