@@ -1,0 +1,23 @@
+ public class ButtonCancelListener implements ActionListener { 
+
+    public void actionPerformed(ActionEvent a)  
+
+    { 
+
+        int n = JOptionPane.showConfirmDialog(null, "Do you want to cancel?", " ", JOptionPane.YES_NO_OPTION); 
+
+             
+
+            if(n == 0) 
+
+                System.exit(0); 
+
+            else 
+
+                JOptionPane.showMessageDialog(null, "Ok you don't want to cancel"); 
+
+    } 
+
+    } 
+
+     
