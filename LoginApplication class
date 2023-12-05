@@ -1,0 +1,255 @@
+  
+
+public class LoginApplication extends JFrame { 
+
+    private JTextField loginTextField; 
+
+    private JPasswordField passwordField; 
+
+    private static final String DATABASE_URL = "jdbc:ucanaccess://C:/Users/Rafeef/javaApps/firsttry/Database1.accdb"; 
+
+    private static final String user = ""; 
+
+    private static final String password = ""; 
+
+  
+
+    public LoginApplication() { 
+
+        super("Login Application"); 
+
+  
+
+        // Create UI components 
+
+        JLabel loginLabel = new JLabel("Login:"); 
+
+        JLabel passwordLabel = new JLabel("Password:"); 
+
+        loginTextField = new JTextField(20); 
+
+        passwordField = new JPasswordField(20); 
+
+        JButton enterButton = new JButton("Enter"); 
+
+        JButton cancelButton = new JButton("Cancel"); 
+
+  
+
+        // Set layout 
+
+        setLayout(new GridLayout(3, 2)); 
+
+  
+
+        // Add components to the frame 
+
+        add(loginLabel); 
+
+        add(loginTextField); 
+
+        add(passwordLabel); 
+
+        add(passwordField); 
+
+        add(enterButton); 
+
+        add(cancelButton); 
+
+  
+
+        // Add action listeners to the buttons 
+
+        enterButton.addActionListener(new ActionListener() { 
+
+            @Override 
+
+            public void actionPerformed(ActionEvent e) { 
+
+                String login = loginTextField.getText(); 
+
+                String password = new String(passwordField.getPassword()); 
+
+  
+
+                // Perform login verification 
+
+                if (verifyLogin(login, password)) { 
+
+                    if (isAdmin(login)) { 
+
+                        openAdminPage(); 
+
+                    } else { 
+
+                        openUserPage(); 
+
+                    } 
+
+                } else { 
+
+                    JOptionPane.showMessageDialog(LoginApplication.this, "Check your login and password", "Error", JOptionPane.ERROR_MESSAGE); 
+
+                } 
+
+            } 
+
+        }); 
+
+  
+
+        cancelButton.addActionListener(new ActionListener() { 
+
+            @Override 
+
+            public void actionPerformed(ActionEvent e) { 
+
+                // Clear text fields 
+
+                loginTextField.setText(""); 
+
+                passwordField.setText(""); 
+
+            } 
+
+        }); 
+
+  
+
+        // Set frame properties 
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+
+        setSize(300, 150); 
+
+        setLocationRelativeTo(null); 
+
+        setResizable(false); 
+
+    } 
+
+  
+
+    private boolean verifyLogin(String user, String password) { 
+
+        try (Connection connection = getConnection()) { 
+
+            // Prepare the SQL statement 
+
+            String query = "SELECT username, password FROM Users WHERE username = ? AND password = ?"; 
+
+            try (PreparedStatement statement = connection.prepareStatement(query)) { 
+
+                statement.setString(1, user); 
+
+                statement.setString(2, password); 
+
+  
+
+                // Execute the query 
+
+                try (ResultSet resultSet = statement.executeQuery()) { 
+
+                    // Return true if at least one row is found in the result set 
+
+                    return resultSet.isBeforeFirst(); 
+
+                } 
+
+            } 
+
+        } catch (SQLException e) { 
+
+            e.printStackTrace(); 
+
+            return false; 
+
+        } 
+
+    } 
+
+  
+
+    private boolean isAdmin(String login) { 
+
+        // TODO: Implement logic to check if the user is an admin 
+
+        // Check if the login belongs to an admin 
+
+        return login.equals("admin"); // Replace with your own logic 
+
+    } 
+
+  
+
+    private void openAdminPage() { 
+
+        JOptionPane.showMessageDialog(this, "Welcome, Admin!"); 
+
+    } 
+
+  
+
+    private void openUserPage() { 
+
+        JOptionPane.showMessageDialog(this, "Welcome, User!"); 
+
+    } 
+
+  
+
+    private Connection getConnection() throws SQLException { 
+
+        try { 
+
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver"); 
+
+        } catch (ClassNotFoundException e) { 
+
+            e.printStackTrace(); 
+
+        } 
+
+  
+
+        System.out.println("Attempting to connect to the database..."); 
+
+        System.out.println("Database URL: " + DATABASE_URL); 
+
+        System.out.println("User: " + user); 
+
+        System.out.println("Password: " + password); 
+
+  
+
+        Connection connection = DriverManager.getConnection(DATABASE_URL, user, password); 
+
+        System.out.println("Connection successful!"); 
+
+  
+
+        return connection; 
+
+    } 
+
+  
+
+    public static void main(String[] args) { 
+
+        SwingUtilities.invokeLater(new Runnable() { 
+
+            @Override 
+
+            public void run() { 
+
+                LoginApplication loginApp = new LoginApplication(); 
+
+                loginApp.setVisible(true); 
+
+            } 
+
+        }); 
+
+    } 
+
+} 
