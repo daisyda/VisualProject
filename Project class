@@ -1,0 +1,129 @@
+public class Project extends JFrame implements ActionListener{ 
+
+  
+
+    private JTextField t1; 
+
+    private JPasswordField t2; 
+
+    private JButton b1,b2; 
+
+    private JLabel l1,l2; 
+
+     
+
+     
+
+     
+
+    public Project(String name){ 
+
+        super(name); 
+
+        setSize(500,500); 
+
+        setLocation(500,600); 
+
+         
+
+        l1=new JLabel("Login"); 
+
+        l2=new JLabel("Password "); 
+
+         
+
+        t1=new JTextField(20); 
+
+        t2=new JPasswordField(20); 
+
+         
+
+        b1=new JButton("Enter"); 
+
+        b2=new JButton("Cancel"); 
+
+         
+
+        JPanel p =(JPanel)getContentPane(); 
+
+        p.setLayout(new GridLayout(2,1)); 
+
+         
+
+        JPanel p1=new JPanel(); 
+
+        p1.setLayout(new GridLayout(2,2)); 
+
+        p1.add(l1); 
+
+        p1.add(t1); 
+
+        p1.add(l2); 
+
+        p1.add(t2); 
+
+        JPanel p2=new JPanel(); 
+
+        p2.setLayout(new FlowLayout(FlowLayout.CENTER)); 
+
+        p2.add(b1); 
+
+        p2.add(b2); 
+
+         
+
+        p.add(p1); 
+
+        p.add(p2); 
+
+         
+
+        b1.addActionListener(this); 
+
+        b2.addActionListener(this); 
+
+        pack(); 
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+
+        setVisible(true);  
+
+    } 
+
+     
+
+    public void actionPerformed(ActionEvent e) { 
+
+    JButton bt = (JButton) e.getSource(); 
+
+    if (bt==b1){ 
+
+        /*if(){ 
+
+             
+
+        } 
+
+        else { 
+
+          JOptionPane.showMessageDialog(null, "Chenck Your Login and Password ", "Input Error", JOptionPane.ERROR_MESSAGE); 
+
+  
+
+        }*/ 
+
+    } 
+
+     
+
+    else{ 
+
+        t1.setText(null); 
+
+        t2.setText(null); 
+
+    } 
+
+    } 
+
+ 
